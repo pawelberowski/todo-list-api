@@ -1,8 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { TaskDto } from './task.dto';
 import { PrismaService } from '../database/prisma.service';
 import { Prisma } from '@prisma/client';
 import { PrismaError } from '../database/prisma-error.enum';
+import { TaskNotFoundException } from './task-not-found.exception';
 
 @Injectable()
 export class TasksService {
@@ -19,7 +20,7 @@ export class TasksService {
       },
     });
     if (!task) {
-      throw new NotFoundException();
+      throw new TaskNotFoundException(id);
     }
     return task;
   }
@@ -46,7 +47,7 @@ export class TasksService {
         error instanceof Prisma.PrismaClientKnownRequestError &&
         error.code === PrismaError.RecordDoesNotExist
       ) {
-        throw new NotFoundException();
+        throw new TaskNotFoundException(id);
       }
       throw error;
     }
@@ -64,7 +65,7 @@ export class TasksService {
         error instanceof Prisma.PrismaClientKnownRequestError &&
         error.code === PrismaError.RecordDoesNotExist
       ) {
-        throw new NotFoundException();
+        throw new TaskNotFoundException(id);
       }
       throw error;
     }
