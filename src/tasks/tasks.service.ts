@@ -4,6 +4,7 @@ import { PrismaService } from '../database/prisma.service';
 import { Prisma } from '@prisma/client';
 import { PrismaError } from '../database/prisma-error.enum';
 import { TaskNotFoundException } from './task-not-found.exception';
+import { CreateTaskDto } from './create-task.dto';
 
 @Injectable()
 export class TasksService {
@@ -25,7 +26,7 @@ export class TasksService {
     return task;
   }
 
-  create(task: TaskDto) {
+  create(task: CreateTaskDto) {
     return this.prismaService.task.create({
       data: task,
     });

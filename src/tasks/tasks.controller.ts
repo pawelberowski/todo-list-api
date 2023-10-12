@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { TaskDto } from './task.dto';
+import { CreateTaskDto } from './create-task.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -26,7 +27,7 @@ export class TasksController {
   }
 
   @Post()
-  create(@Body() task: TaskDto) {
+  create(@Body() task: CreateTaskDto) {
     return this.tasksService.create(task);
   }
 
