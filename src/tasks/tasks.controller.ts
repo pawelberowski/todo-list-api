@@ -9,7 +9,8 @@ import {
   Patch,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
-import { TaskDto } from './task.dto';
+import { CreateTaskDto } from './create-task.dto';
+import { UpdateTaskDto } from './update-task.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -26,12 +27,12 @@ export class TasksController {
   }
 
   @Post()
-  create(@Body() task: TaskDto) {
+  create(@Body() task: CreateTaskDto) {
     return this.tasksService.create(task);
   }
 
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() task: TaskDto) {
+  update(@Param('id', ParseIntPipe) id: number, @Body() task: UpdateTaskDto) {
     return this.tasksService.update(id, task);
   }
 

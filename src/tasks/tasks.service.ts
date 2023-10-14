@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { TaskDto } from './task.dto';
 import { PrismaService } from '../database/prisma.service';
 import { Prisma } from '@prisma/client';
 import { PrismaError } from '../database/prisma-error.enum';
 import { TaskNotFoundException } from './task-not-found.exception';
+import { CreateTaskDto } from './create-task.dto';
+import { UpdateTaskDto } from './update-task.dto';
 
 @Injectable()
 export class TasksService {
@@ -25,13 +26,13 @@ export class TasksService {
     return task;
   }
 
-  create(task: TaskDto) {
+  create(task: CreateTaskDto) {
     return this.prismaService.task.create({
       data: task,
     });
   }
 
-  async update(id: number, task: TaskDto) {
+  async update(id: number, task: UpdateTaskDto) {
     try {
       return await this.prismaService.task.update({
         data: {
