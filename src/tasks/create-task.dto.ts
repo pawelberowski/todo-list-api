@@ -1,4 +1,5 @@
 import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { CanBeUndefined } from '../utils/can-be-undefined';
 
 export class CreateTaskDto {
   @IsString()
@@ -9,6 +10,6 @@ export class CreateTaskDto {
   @IsOptional()
   description?: string | null;
   @IsBoolean()
-  @IsOptional()
+  @CanBeUndefined()
   isCompleted?: boolean;
 }
